@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Click Here</h1>
+    <script>
+    const h1 = document.querySelector('h1');
+    let count=0;
+    var interval
+    h1.addEventlistener('click', ()=> {
+        if(interval) {
+            alert("Already Running");
+            return;
+        }
+        alert("Started");
+        interval = setInterval(start, 1000);
+    });
+    addEventListener
+
+    function start(){
+        h1.innertext = "Hello World"
+    }
+    </script>
+</body>
+</html>

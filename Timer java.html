@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 60px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        body {
+            background-color: black;
+            text-align: center;
+        }
+        #start, #stop, #reset {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            border: none;
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            cursor: pointer;
+        }
+        #start { background-color: green; }
+        #stop { background-color: red; }
+        #reset { background-color: blue; }
+        #timer {
+            border: 1px solid gray;
+            color: white;
+            padding: 20px;
+            display: inline-block;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stopwatch</h1>
+    <h1 id="timer">00:00:00</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+
+    <script>
+        let timerInterval;
+        let isRunning = false;
+        let seconds = 0, minutes = 0, hours = 0;
+
+        function updateTime() {
+            seconds++;
+            if (seconds === 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes === 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+            document.getElementById('timer').textContent =
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        document.getElementById('start').addEventListener('click', function() {
+            if (!isRunning) {
+                timerInterval = setInterval(updateTime, 1000);
+                isRunning = true;
+            }
+        });
+
+        document.getElementById('stop').addEventListener('click', function() {
+            clearInterval(timerInterval);
+            isRunning = false;
+        });
+
+        document.getElementById('reset').addEventListener('click', function() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            document.getElementById('timer').textContent = '00:00:00';
+        });
+    </script>
+</body>
+</html>
