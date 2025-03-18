@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Calculator</title>
+    <script>
+        function calculate() {
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+            let operation = document.getElementById("operation").value;
+            let result = 0;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Please enter valid numbers.");
+                return;
+            }
+
+            switch (operation) {
+                case "add":
+                    result = num1 + num2;
+                    break;
+                case "subtract":
+                    result = num1 - num2;
+                    break;
+                case "multiply":
+                    result = num1 * num2;
+                    break;
+                case "divide":
+                    if (num2 === 0) {
+                        alert("Division by zero is not allowed.");
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                default:
+                    alert("Invalid operation");
+                    return;
+            }
+
+            document.getElementById("result").textContent = "Result: " + result;
+        }
+    </script>
+</head>
+<body>
+    <h2>Simple Web Calculator</h2>
+    <form onsubmit="event.preventDefault(); calculate();">
+        <input type="number" id="num1" placeholder="Enter First Number" required><br><br>
+        <select id="operation">
+            <option value="add">Addition (+)</option>
+            <option value="subtract">Subtraction (-)</option>
+            <option value="multiply">Multiplication (*)</option>
+            <option value="divide">Division (/)</option>
+        </select><br><br>
+        <input type="number" id="num2" placeholder="Enter Second Number" required><br><br>
+        <button type="submit">Calculate</button>
+    </form>
+    <h3 id="result">Result: 0</h3>
+</body>
+</html>
